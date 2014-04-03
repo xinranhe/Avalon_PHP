@@ -1,6 +1,7 @@
 <?php
     include 'authCheck.php';
     include 'dbConfig.php';
+    include 'userConfig.php';
 ?>
 <html>
 <head>
@@ -30,14 +31,45 @@ include "htmlHeader.php";
     $expId = $_GET['expId'];
 
     $con=getDBConnection();
-    $sqlStr = "select ExpStatus from Experiment where ExpId = ?";
+    $sqlStr = "select ExpStatus,UserName from Experiment where ExpId = ?";
     $stmt = $con->prepare($sqlStr);
     $stmt->bind_param("s", $expId);
     $stmt->execute();
     $results = $stmt->get_result();
     $row = mysqli_fetch_row($results);
     echo "<span class='" . $row[0] . "'>" . "Experiment:" . $expId .  "</span>";
-    echo "<span style='float:right' class='" . $row[0] . "'>" . $row[0] .  "</span>"
+    echo "<span style='float:right' class='" . $row[0] . "'>" . $row[0] .  "</span>";
+
+    echo "<br>";
+    $cloneStr = sprintf("<a href='newExp.php?expId=%s'>Clone</a>", $row[0]);
+    $resultStr = $cloneStr . "&nbsp;&nbsp;&nbsp;";
+    echo $resultStr;
+    if($_SESSION['user'] == $row[1] || isAdmin())
+        echo getActionStrByStatus($expId, $row[0]);
+
+    function getActionStrByStatus($expId,$status) {
+        $rerunStr = sprintf("<a href='alterExperiment.php?expId=%s&request=%s'>Resubmit</a>", $expId, "Rerun");
+        $pauseStr = sprintf("<a href='alterExperiment.php?expId=%s&request=%s'>Pause</a>", $expId, "Pause");
+        $resumeStr = sprintf("<a href='alterExperiment.php?expId=%s&request=%s'>Resume</a>", $expId, "Resume");
+        $stopStr = sprintf("<a href='alterExperiment.php?expId=%s&request=%s'>Stop</a>", $expId, "Stop");
+        $deleteStr = sprintf("<a href='alterExperiment.php?expId=%s&request=%s'>Delete</a>", $expId, "Delete");
+        $resultStr = '';
+        if($status=='New' || $status=='Running') {
+            $resultStr .= ($pauseStr . "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+        if($status=='New' || $status=='Running' || $status=='Pausing') {
+            $resultStr .= ($stopStr . "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+        if($status=='Pausing') {
+            $resultStr .= ($resumeStr . "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+        if($status=='Failed' || $status=='Finished') {
+            $resultStr .= ($rerunStr  . "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+        $resultStr .= $deleteStr;
+        return $resultStr;
+    }
+
 ?>
 </h1>
 <hr>
@@ -187,7 +219,25 @@ include "htmlHeader.php";
                 initialContentAlignment: go.Spot.Center
             });
     var portSize = 8;
+    var nodeMenu = // context menu for each node
+        $(go.Adornment, "Vertical",
+            $("ContextMenuButton",
+                $(go.TextBlock, "ShowStdOutput"),
+                { click: function (e, obj) {
+                    try {
+                        urlStr = obj.part.adornedObject.data.stdOutLink;
+                        if(urlStr) {
+                            openNewSmallWindows(urlStr);
+                        } else {
+                            alert("Output Data is not available!")
+                        }
 
+                    }
+                    catch(err) {
+                        alert("Output Data is not available!")
+                    }
+                } })
+        );
     var portMenu =  // context menu for each port
         $(go.Adornment, "Vertical",
             $("ContextMenuButton",
@@ -223,11 +273,14 @@ include "htmlHeader.php";
                 }})
         );
 
+
+
     myDiagram.nodeTemplate =
         $(go.Node, "Table",
             { locationObjectName: "BODY",
                 locationSpot: go.Spot.Center,
-                selectionObjectName: "BODY"
+                selectionObjectName: "BODY",
+                contextMenu: nodeMenu
             },
             new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
 

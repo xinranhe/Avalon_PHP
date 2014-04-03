@@ -314,7 +314,7 @@ if(isset($_GET['expId'])) {
                     }
                 }
             )
-            function sameDataType(fromnode, fromport, tonode, toport) {
+        function sameDataType(fromnode, fromport, tonode, toport) {
             return fromport.data.portTypeName === toport.data.portTypeName;
         }
         // function to handle new Item adding
