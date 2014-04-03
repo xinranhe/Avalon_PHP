@@ -37,6 +37,11 @@
         if($item->nodeType=="Module" && $nodeStatus[$p]!="New") {
             $item->stdOutLink = "showStdOutput.php?expId=" . $expId . "&nodeId=" .$p;
         }
+        if($item->nodeType=="Data") {
+            $item->infoLink = "showItemInfo.php?itemType=Data&itemId=" . $item->dataArray->dataId;
+        } else {
+            $item->infoLink = "showItemInfo.php?itemType=Module&itemId=" . $item->dataArray->moduleId . "&paramStr=" . $item->parameters;
+        }
         if($nodeStatus[$p]=="Finished") {
             // put download link for port
             $pn = 1;

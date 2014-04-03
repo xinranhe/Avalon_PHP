@@ -236,6 +236,22 @@ include "htmlHeader.php";
                     catch(err) {
                         alert("Output Data is not available!")
                     }
+                } }),
+            $("ContextMenuButton",
+                $(go.TextBlock, "ShowNodeInfo"),
+                { click: function (e, obj) {
+                    try {
+                        urlStr = obj.part.adornedObject.data.infoLink;
+                        if(urlStr) {
+                            openNewSmallWindows(urlStr);
+                        } else {
+                            alert("Node info is not available!")
+                        }
+
+                    }
+                    catch(err) {
+                        alert("Node info is not available!")
+                    }
                 } })
         );
     var portMenu =  // context menu for each port
