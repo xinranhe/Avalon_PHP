@@ -454,7 +454,7 @@ if(isset($_GET['expId'])) {
             xmlhttp.send();
         }
         // show data info and module info panel
-        function showNodeDataInfoPanel(dataArrat) {
+        function showNodeDataInfoPanel(dataArray) {
             htmlStr = getDataBasicInfoStr(dataArray)
             document.getElementById("itemInfoField").innerHTML = htmlStr
         }
@@ -498,7 +498,7 @@ if(isset($_GET['expId'])) {
             htmlStr += "<tr><td>Create Time:</td>"
             htmlStr += "<td>" + moduleArray["createTime"] + "</td></tr>";
             htmlStr += "<tr><td>Description:</td>"
-            htmlStr += "<td><textarea readonly rows='5' class='notEditable'>" + dataArray["description"] + "</textarea></td></tr>"
+            htmlStr += "<td><textarea readonly rows='5' class='notEditable'>" + moduleArray["description"] + "</textarea></td></tr>"
             htmlStr += "</table></fieldset>"
             return htmlStr
         }
