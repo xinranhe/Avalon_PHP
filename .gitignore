@@ -1,0 +1,5 @@
+dbConfig.php
+fileLocationConfig.php
+.idea/*
+*.xml
+*.name

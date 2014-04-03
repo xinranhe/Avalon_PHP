@@ -1,0 +1,42 @@
+fieldset.inTable {
+    width: 80%;
+}
+fieldset.alone {
+    width: 100%;
+}
+
+.largeButton {
+    height: 50px;
+    box-sizing: content-box;
+}
+
+textarea {
+    resize: none;
+}
+
+table, tr, td{
+    background: transparent;
+}
+
+.halfWidth {
+    width: 50%;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.fullBoth {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+textarea.notEditable {
+    background: transparent;
+    resize: none;
+}
+
+select, input[type="text"],textarea {
+    background: rgba(255,255,255,0.5);
+}

@@ -1,0 +1,10 @@
+table.full {
+    width:100%;
+    border: 3;
+}
+.Failed {background-color: lightpink}
+.New {background-color: white}
+.Finished {background-color: lightgreen}
+.Aborted {background-color: lightpink}
+.Running {background-color: lightblue}
+.Pausing {background-color: lightgoldenrodyellow}
