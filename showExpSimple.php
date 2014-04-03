@@ -37,11 +37,11 @@ include "htmlHeader.php";
     $stmt->execute();
     $results = $stmt->get_result();
     $row = mysqli_fetch_row($results);
-    echo "<span class='" . $row[0] . "'>" . "Experiment:" . $expId .  "</span>";
+    echo "<span class='" . $row[0] . "'>" . "Experiment:" . $expId  .  "</span>";
     echo "<span style='float:right' class='" . $row[0] . "'>" . $row[0] .  "</span>";
 
     echo "<br>";
-    $cloneStr = sprintf("<a href='newExp.php?expId=%s'>Clone</a>", $row[0]);
+    $cloneStr = sprintf("<a href='newExp.php?expId=%s'>Clone</a>", $expId);
     $resultStr = $cloneStr . "&nbsp;&nbsp;&nbsp;";
     echo $resultStr;
     if($_SESSION['user'] == $row[1] || isAdmin())
