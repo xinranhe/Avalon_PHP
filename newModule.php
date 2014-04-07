@@ -38,7 +38,7 @@ if(isset($_GET['moduleId'])) {
             $tempFileds = explode(':', $fields[$i]);
             $name = $tempFileds[0];
             $typeName = $id2name[intval($tempFileds[1])];
-            $resultStr .= "<option>" . $name . ':' . $typeName . "</option>";
+            $resultStr .= "<option value='" . $name . ":" . $tempFileds[1] . ";'>" . $name . ':' . $typeName . "</option>";
         }
         return $resultStr;
     }
@@ -50,7 +50,7 @@ if(isset($_GET['moduleId'])) {
             return "";
         }
         for($i=1;$i<=$argNum;$i++) {
-            $resultStr .= "<option>" . $fields[$i] . "</option>";
+            $resultStr .= "<option value='" . $fields[$i] . ";'>" . $fields[$i] . "</option>";
         }
         return $resultStr;
     }
@@ -69,7 +69,7 @@ if(isset($_GET['moduleId'])) {
             overflow-y: scroll;
             width: 150px;
         }
-        .wrapper:selection{
+        .wrapper::selection{
             width:150px;
             border:1px solid #ccc
         }
@@ -114,12 +114,9 @@ if(isset($_GET['moduleId'])) {
         function showDataType() {
             $sqlStr = "select DataTypeId, Name, Description from DataType";
             $results = execQuery($sqlStr);
+
             while($row = mysqli_fetch_row($results)) {
-                if(isset($moduleId) && $row[0]==$moduleTypeId) {
-                    echo "<option selected value=\"" . $row[0] . "\">" . $row[1] . "</option>";
-                } else {
-                    echo "<option value=\"" . $row[0] . "\">" . $row[1] . "</option>";
-                }
+                echo "<option value=\"" . $row[0] . "\">" . $row[1] . "</option>";
             }
         }
     ?>
@@ -134,7 +131,11 @@ if(isset($_GET['moduleId'])) {
                         $sqlStr = "select ModuleTypeId, Name, Description from ModuleType";
                         $results = execQuery($sqlStr);
                         while($row = mysqli_fetch_row($results)) {
-                            echo "<option value=\"" . $row[0] . "\">" . $row[1] . ":" . $row[2] . "</option>";
+                            if(isset($moduleId) && $row[0]==$moduleTypeId) {
+                                echo "<option selected value=\"" . $row[0] . "\">" . $row[1] . ":" . $row[2] . "</option>";
+                            } else {
+                                echo "<option value=\"" . $row[0] . "\">" . $row[1] . ":" . $row[2] . "</option>";
+                            }
                         }
                         ?>
                     </select>
