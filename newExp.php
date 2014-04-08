@@ -307,9 +307,11 @@ if(isset($_GET['expId'])) {
                         currentSelectNode = elem
                         if(elem.data.nodeType == "Data") {
                             showNodeDataInfoPanel(elem.data.dataArray);
+                            currentDataArray = elem.data.dataArray;
                         }
                         else if(elem.data.nodeType == "Module") {
                             showNodeModuleInfoPanel(elem.data.dataArray, elem.data.parameters);
+                            currentDataArray = elem.data.dataArray;
                         }
                     }
                 }
