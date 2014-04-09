@@ -47,13 +47,21 @@
             $pn = 1;
             foreach($item->bottomArray as $port) {
                 $port->myPortId = strval($pn);
-                $linkStr = "downloadFile.php?expId=" . $expId . "&nodeId=" .$p . "&portId=" . $pn++;
-                $saveResultLink = "newDataFromOutput.php?expId=" . $expId . "&nodeId=" .$p . "&portId=" . $pn++ . "&dataTypeId=" . strval($port->portTypeId);
+                $linkStr = "downloadFile.php?expId=" . $expId . "&nodeId=" .$p . "&portId=" . $pn;
+                $saveResultLink = "newDataFromOutput.php?expId=" . $expId . "&nodeId=" .$p . "&portId=" . $pn . "&dataTypeId=" . strval($port->portTypeId);
                 $port->downloadLink = $linkStr;
                 $port->saveLink = $saveResultLink;
+                $port->showLink = getShowLink($expId, $p, $pn, $port->portTypeName);
+                $pn++;
             }
         }
         $p++;
+    }
+
+    function getShowLink($expId, $nodeId, $portId, $dataType) {
+        $linkStr = "showPlainText.php?";
+        $linkStr .= "expId=" . $expId . "&nodeId=" .$nodeId . "&portId=" . $portId;
+        return $linkStr;
     }
 
     $newJsonStr = json_encode($jsonObj,JSON_PRETTY_PRINT);

@@ -257,6 +257,17 @@ include "htmlHeader.php";
     var portMenu =  // context menu for each port
         $(go.Adornment, "Vertical",
             $("ContextMenuButton",
+                $(go.TextBlock, "Show"),
+                { click: function (e, obj) {
+                    try {
+                        urlStr = obj.part.adornedObject.data.showLink;
+                        popupwindow(urlStr, "Show Output", 600, 400);
+                    }
+                    catch(err) {
+                        alert("Output Data is not available!")
+                    }
+                }}),
+            $("ContextMenuButton",
                 $(go.TextBlock, "Download"),
                 { click: function (e, obj) {
                     try {
