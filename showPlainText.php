@@ -30,7 +30,7 @@ if(isset($_GET["expId"]) && isset($_GET["nodeId"]) && isset($_GET["portId"])) {
     echo file_get_contents($outFullFilePath);
     ?></pre>
 <?php else : ?>
-File size: <?php echo $fileSize;?>
+File size: <?php echo intval($fileSize)/1000 . "KB<br>";?>
 File is too large to show!
 <?php endif; ?>
 </body>
