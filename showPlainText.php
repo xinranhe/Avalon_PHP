@@ -25,7 +25,7 @@ if(isset($_GET["expId"]) && isset($_GET["nodeId"]) && isset($_GET["portId"])) {
     Exp: <?php echo $expId ?> <br> Node: <?php echo $nodeId ?> &nbsp;&nbsp;&nbsp;&nbsp; Port: <?php echo $portId ?>
 </H1>
 <hr/>
-<?php if($fileSize<=1000) : ?>
+<?php if($fileSize<=20000) : ?>
 <pre><?php
     echo file_get_contents($outFullFilePath);
     ?></pre>
