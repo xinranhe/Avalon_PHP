@@ -18,6 +18,3 @@
         <span style="float: right; margin-right: 10px;"><a href="javascript:history.go(0)" class="headerA">Refresh</a></span>
     </div>
 </div>
-<?php
-
-?>

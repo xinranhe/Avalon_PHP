@@ -39,3 +39,4 @@ if(isset($_GET["expId"]) && isset($_GET["nodeId"])) {
     echo file_get_contents($errFullFilePath);
     ?></pre>
 </body>
+</html>

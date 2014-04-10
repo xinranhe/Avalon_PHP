@@ -34,3 +34,4 @@ File size: <?php echo intval($fileSize)/1000 . "KB<br>";?>
 File is too large to show!
 <?php endif; ?>
 </body>
+</html>

@@ -59,7 +59,11 @@
     }
 
     function getShowLink($expId, $nodeId, $portId, $dataType) {
-        $linkStr = "showPlainText.php?";
+        if($dataType=="Graph_Vis") {
+            $linkStr = "showGraph.php?";
+        } else {
+            $linkStr = "showPlainText.php?";
+        }
         $linkStr .= "expId=" . $expId . "&nodeId=" .$nodeId . "&portId=" . $portId;
         return $linkStr;
     }
