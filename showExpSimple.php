@@ -202,10 +202,13 @@ include "htmlHeader.php";
         xmlhttp.open("GET","getExpVisJsonWithStatus.php?expId="+expId,true);
         xmlhttp.send();
     }
+    var ctr = 0;
     function popupwindow(url, title, w, h) {
         var left = (screen.width/2)-(w/2);
         var top = (screen.height/2)-(h/2);
-        return window.open(url, title, 'directories=0,titlebar=0,toolbar=no,location=no,status=no,menubar=0,scrollbars=0, resizable=no, copyhistory=0, width='+w+', height='+h+', top='+top+', left='+left);
+        var winName = "win_" + ctr;
+        ctr++;
+        var tempWindows =  window.open(url, winName, 'directories=0,titlebar=0,toolbar=no,location=no,status=no,menubar=0,scrollbars=0, resizable=no, copyhistory=0, width='+w+', height='+h+', top='+top+', left='+left);
     }
 </script>
 
