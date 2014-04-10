@@ -55,7 +55,7 @@ if(isset($_POST["dataName"]) && isset($_POST["dataType"]) && isset($_POST["dataV
     mkdir($folderPath, 0777);
     umask($oldmask);
 
-    $portId = strval(intval($_POST['portId'])-1);
+    $portId = strval(intval($_POST['portId']));
 
     $dataFileName = $_POST["expId"] . "_" . $_POST["nodeId"] . "_" . $portId . ".out";
     $fromPath = $expDir . DIRECTORY_SEPARATOR . $_POST["expId"] . DIRECTORY_SEPARATOR . $dataFileName;
