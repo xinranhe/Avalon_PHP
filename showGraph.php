@@ -96,7 +96,7 @@ if(isset($_GET["expId"]) && isset($_GET["nodeId"]) && isset($_GET["portId"])) {
     Exp: <?php echo $expId ?> <br> Node: <?php echo $nodeId ?> &nbsp;&nbsp;&nbsp;&nbsp; Port: <?php echo $portId ?>
 </H1>
 <hr/>
-<?php if(count($nodes)<256) : ?>
+<?php if(count($nodes)<300) : ?>
     <div>
         <canvas id="cv" width="1247" height="1247">
         </canvas>
