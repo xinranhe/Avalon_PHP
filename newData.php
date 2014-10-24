@@ -60,7 +60,7 @@
         }
     </script>
     <form name="NewData" method="post" action="uploadNewData.php" enctype="multipart/form-data">
-       <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+       <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
        <FIELDSET>
            <LEGEND>Basic Information</LEGEND>
             <table border="1" class="fullWidth">

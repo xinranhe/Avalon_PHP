@@ -7,7 +7,7 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['timeout']))      // if there i
 }
 else {
     // session time in seconds;
-    $sessionTime = 600;
+    $sessionTime = 7200;
     if($_SESSION['timeout'] + $sessionTime < time()) {
         // session time out
         include "logout.php";
